@@ -30,8 +30,8 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
         /// <returns>The SPA markup.</returns>
         public async Task<ActionResult> Index(FormCollection form)
         {
-            #try
-            #{
+            //try
+            //{
                 // get a copy of the plugins and the client configuration
                 PluginsSegment clientVisiblePlugins = ApplicationConfiguration.WebPortalConfigurationManager.GeneratePlugins();
                 IDictionary<string, dynamic> clientConfiguration = new Dictionary<string, dynamic>(ApplicationConfiguration.ClientConfiguration);
@@ -86,13 +86,13 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 }
 
                 return View();
-            #}
-            #catch (Exception exception)
-            #{
-            #    ViewBag.ErrorMessage = Resources.PortalStartupFailure;
-            #    ViewBag.ErrorDetails = exception.Message;
-            #    return View("Error");
-            #}
+            //}
+            //catch (Exception exception)
+            //{
+            //    ViewBag.ErrorMessage = Resources.PortalStartupFailure;
+            //    ViewBag.ErrorDetails = exception.Message;
+            //    return View("Error");
+            //}
         }
 
         /// <summary>
