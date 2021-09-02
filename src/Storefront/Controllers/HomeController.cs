@@ -100,14 +100,14 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
         /// </summary>
         /// <param name="errorMessage">The error message to display.</param>
         /// <returns>The error view.</returns>
-        public async Task<ActionResult> Error(string errorMessage)
-        {
-            Models.BrandingConfiguration portalBranding = await ApplicationDomain.Instance.PortalBranding.RetrieveAsync().ConfigureAwait(false);
-
-            ViewBag.ErrorMessage = errorMessage;
-            ViewBag.OrganizationName = portalBranding.OrganizationName;
-
-            return View();
-        }
+        ///public async Task<ActionResult> Error(string errorMessage)
+        ///{
+       ///     Models.BrandingConfiguration portalBranding = await ApplicationDomain.Instance.PortalBranding.RetrieveAsync().ConfigureAwait(false);
+///
+      ///      ViewBag.ErrorMessage = errorMessage;
+        ///    ViewBag.OrganizationName = portalBranding.OrganizationName;
+///
+   ///         return View();
+      ///  }
     }
 }
