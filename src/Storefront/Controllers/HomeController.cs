@@ -99,7 +99,7 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
             catch (Exception exception)
             {
                 ViewBag.ErrorMessage = Resources.PortalStartupFailure;
-                ViewBag.ErrorDetails = exception.Message + "|" exception.StackTrace  + "|" + sb.ToString();
+                ViewBag.ErrorDetails = exception.StackTrace;
               ///  ViewBag.ErrorDetails = exception.Message;
                 return View("Error");
             }
