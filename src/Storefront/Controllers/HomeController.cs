@@ -17,7 +17,7 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
     using Configuration;
     using Configuration.WebPortal;
     using Newtonsoft.Json;
-
+    using System.Text;
     /// <summary>
     /// Manages the application home page requests.
     /// </summary>
