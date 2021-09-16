@@ -30,15 +30,19 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
         /// <returns>The SPA markup.</returns>
         public async Task<ActionResult> Index(FormCollection form)
         {
-            //try
-            //{
+            StringBuilder sb = new StringBuilder();
+            try
+            {
                 // get a copy of the plugins and the client configuration
                 PluginsSegment clientVisiblePlugins = ApplicationConfiguration.WebPortalConfigurationManager.GeneratePlugins();
+                sb.Append("clientVisiblePlugins section");
+                sb.AppendLine("");
                 IDictionary<string, dynamic> clientConfiguration = new Dictionary<string, dynamic>(ApplicationConfiguration.ClientConfiguration);
 
                 // configure the tiles to show and hide based on the logged in user role
                 CustomerPortalPrincipal principal = HttpContext.User as CustomerPortalPrincipal;
-
+                sb.Append("principal section");
+                sb.AppendLine("");
                 clientVisiblePlugins.Plugins.First(x => x.Name == "CustomerAccount").Hidden = !principal.IsPartnerCenterCustomer;
                 clientVisiblePlugins.Plugins.First(x => x.Name == "CustomerSubscriptions").Hidden = !principal.IsPartnerCenterCustomer;
                 clientVisiblePlugins.Plugins.First(x => x.Name == "AdminConsole").Hidden = !principal.IsPortalAdmin;
@@ -55,25 +59,30 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 {
                     clientVisiblePlugins.DefaultPlugin = "Home";
                 }
-
+                sb.Append("after validation principal.IsPortalAdmin");
+                sb.AppendLine("");
                 clientConfiguration["DefaultTile"] = clientVisiblePlugins.DefaultPlugin;
                 clientConfiguration["Tiles"] = clientVisiblePlugins.Plugins;
 
                 ViewBag.Templates = ApplicationConfiguration.WebPortalConfigurationManager.AggregateStartupAssets().Templates;
                 ViewBag.OrganizationName = (await ApplicationDomain.Instance.PortalBranding.RetrieveAsync().ConfigureAwait(false)).OrganizationName;
                 ViewBag.IsAuthenticated = Request.IsAuthenticated ? "true" : "false";
-
+                sb.Append("after viewbag");
+                sb.AppendLine("");
                 if (Request.IsAuthenticated)
                 {
                     ViewBag.UserName = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst("name").Value ?? "Unknown";
                     ViewBag.Email = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.Name)?.Value ??
                         ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.Email)?.Value;
+                sb.Append("inside Request.IsAuthenticated");
+                sb.AppendLine("");
                 }
 
                 ViewBag.Configuratrion = JsonConvert.SerializeObject(
                     clientConfiguration,
                     new JsonSerializerSettings() { StringEscapeHandling = StringEscapeHandling.Default });
-
+                sb.Append("after ViewBag.Configuratrion");
+                sb.AppendLine("");
                 if (!Resources.Culture.TwoLetterISOLanguageName.Equals("en", StringComparison.InvariantCultureIgnoreCase))
                 {
                     ViewBag.ValidatorMessagesSrc = string.Format(CultureInfo.InvariantCulture, "https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/localization/messages_{0}.js", Resources.Culture.TwoLetterISOLanguageName);
@@ -86,13 +95,14 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 }
 
                 return View();
-            //}
-            //catch (Exception exception)
-            //{
-            //    ViewBag.ErrorMessage = Resources.PortalStartupFailure;
-            //    ViewBag.ErrorDetails = exception.Message;
-            //    return View("Error");
-            //}
+            }
+            catch (Exception exception)
+            {
+                ViewBag.ErrorMessage = Resources.PortalStartupFailure;
+                ViewBag.ErrorDetails = exception.Message + "|" exception.StackTrace  + "|" + sb.ToString());
+              ///  ViewBag.ErrorDetails = exception.Message;
+                return View("Error");
+            }
         }
 
         /// <summary>
@@ -100,14 +110,14 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
         /// </summary>
         /// <param name="errorMessage">The error message to display.</param>
         /// <returns>The error view.</returns>
-        ///public async Task<ActionResult> Error(string errorMessage)
-        ///{
-       ///     Models.BrandingConfiguration portalBranding = await ApplicationDomain.Instance.PortalBranding.RetrieveAsync().ConfigureAwait(false);
-///
-      ///      ViewBag.ErrorMessage = errorMessage;
-        ///    ViewBag.OrganizationName = portalBranding.OrganizationName;
-///
-   ///         return View();
-      ///  }
+        public async Task<ActionResult> Error(string errorMessage)
+        {
+            Models.BrandingConfiguration portalBranding = await ApplicationDomain.Instance.PortalBranding.RetrieveAsync().ConfigureAwait(false);
+
+            ViewBag.ErrorMessage = errorMessage;
+            ViewBag.OrganizationName = portalBranding.OrganizationName;
+
+            return View();
+        }
     }
 }
