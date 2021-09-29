@@ -61,8 +61,8 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 }
                 // sb.Append("after validation principal.IsPortalAdmin");
                 // sb.AppendLine("");
-                // clientConfiguration["DefaultTile"] = clientVisiblePlugins.DefaultPlugin;
-                // clientConfiguration["Tiles"] = clientVisiblePlugins.Plugins;
+                clientConfiguration["DefaultTile"] = clientVisiblePlugins.DefaultPlugin;
+                clientConfiguration["Tiles"] = clientVisiblePlugins.Plugins;
 
                  ViewBag.Templates = ApplicationConfiguration.WebPortalConfigurationManager.AggregateStartupAssets().Templates;
                  ViewBag.OrganizationName = (await ApplicationDomain.Instance.PortalBranding.RetrieveAsync().ConfigureAwait(false)).OrganizationName;
@@ -78,21 +78,21 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 // sb.AppendLine("");
                 // }
 
-                // ViewBag.Configuratrion = JsonConvert.SerializeObject(
-                //     clientConfiguration,
-                //     new JsonSerializerSettings() { StringEscapeHandling = StringEscapeHandling.Default });
-                // sb.Append("after ViewBag.Configuratrion");
-                // sb.AppendLine("");
-                // if (!Resources.Culture.TwoLetterISOLanguageName.Equals("en", StringComparison.InvariantCultureIgnoreCase))
-                // {
-                //     ViewBag.ValidatorMessagesSrc = string.Format(CultureInfo.InvariantCulture, "https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/localization/messages_{0}.js", Resources.Culture.TwoLetterISOLanguageName);
-                // }
+                ViewBag.Configuratrion = JsonConvert.SerializeObject(
+                    clientConfiguration,
+                    new JsonSerializerSettings() { StringEscapeHandling = StringEscapeHandling.Default });
+                sb.Append("after ViewBag.Configuratrion");
+                sb.AppendLine("");
+                if (!Resources.Culture.TwoLetterISOLanguageName.Equals("en", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    ViewBag.ValidatorMessagesSrc = string.Format(CultureInfo.InvariantCulture, "https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/localization/messages_{0}.js", Resources.Culture.TwoLetterISOLanguageName);
+                }
 
-                // if (form.Count > 0)
-                // {
-                //     ViewBag.paymentId = form["txnid"];
-                //     ViewBag.txnId = form["payuMoneyId"];
-                // }
+                if (form.Count > 0)
+                {
+                    ViewBag.paymentId = form["txnid"];
+                    ViewBag.txnId = form["payuMoneyId"];
+                }
 
                 return View();
             }
