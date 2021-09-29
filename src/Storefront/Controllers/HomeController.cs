@@ -102,7 +102,7 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 ViewBag.ErrorDetails = sb.ToString();
               ///  ViewBag.ErrorDetails = exception.Message;
              ///    return View("Error");
-             return Ok(sb.ToString());
+             return sb.ToString();
             }
         }
 
