@@ -101,7 +101,8 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 ViewBag.ErrorMessage = exception.StackTrace;
                 ViewBag.ErrorDetails = sb.ToString();
               ///  ViewBag.ErrorDetails = exception.Message;
-                return View("Error");
+             ///    return View("Error");
+             return Ok(sb.ToString());
             }
         }
 
