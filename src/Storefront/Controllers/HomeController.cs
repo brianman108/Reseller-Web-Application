@@ -64,8 +64,8 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 // clientConfiguration["DefaultTile"] = clientVisiblePlugins.DefaultPlugin;
                 // clientConfiguration["Tiles"] = clientVisiblePlugins.Plugins;
 
-                // ViewBag.Templates = ApplicationConfiguration.WebPortalConfigurationManager.AggregateStartupAssets().Templates;
-                // ViewBag.OrganizationName = (await ApplicationDomain.Instance.PortalBranding.RetrieveAsync().ConfigureAwait(false)).OrganizationName;
+                 ViewBag.Templates = ApplicationConfiguration.WebPortalConfigurationManager.AggregateStartupAssets().Templates;
+                 ViewBag.OrganizationName = (await ApplicationDomain.Instance.PortalBranding.RetrieveAsync().ConfigureAwait(false)).OrganizationName;
                 // ViewBag.IsAuthenticated = Request.IsAuthenticated ? "true" : "false";
                 // sb.Append("after viewbag");
                 // sb.AppendLine("");
