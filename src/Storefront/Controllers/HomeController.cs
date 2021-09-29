@@ -29,7 +29,7 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
         /// <param name="form">form data</param>
         /// <returns>The SPA markup.</returns>
         ///public async Task<ActionResult> Index(FormCollection form)
-        public ContentResult Index(FormCollection form)
+        public async ContentResult Index(FormCollection form)
         {
             StringBuilder sb = new StringBuilder();
             try
