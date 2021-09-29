@@ -59,52 +59,50 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 {
                     clientVisiblePlugins.DefaultPlugin = "Home";
                 }
-                sb.Append("after validation principal.IsPortalAdmin");
-                sb.AppendLine("");
-                clientConfiguration["DefaultTile"] = clientVisiblePlugins.DefaultPlugin;
-                clientConfiguration["Tiles"] = clientVisiblePlugins.Plugins;
+                // sb.Append("after validation principal.IsPortalAdmin");
+                // sb.AppendLine("");
+                // clientConfiguration["DefaultTile"] = clientVisiblePlugins.DefaultPlugin;
+                // clientConfiguration["Tiles"] = clientVisiblePlugins.Plugins;
 
-                ViewBag.Templates = ApplicationConfiguration.WebPortalConfigurationManager.AggregateStartupAssets().Templates;
-                ViewBag.OrganizationName = (await ApplicationDomain.Instance.PortalBranding.RetrieveAsync().ConfigureAwait(false)).OrganizationName;
-                ViewBag.IsAuthenticated = Request.IsAuthenticated ? "true" : "false";
-                sb.Append("after viewbag");
-                sb.AppendLine("");
-                if (Request.IsAuthenticated)
-                {
-                    ViewBag.UserName = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst("name").Value ?? "Unknown";
-                    ViewBag.Email = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.Name)?.Value ??
-                        ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.Email)?.Value;
-                sb.Append("inside Request.IsAuthenticated");
-                sb.AppendLine("");
-                }
+                // ViewBag.Templates = ApplicationConfiguration.WebPortalConfigurationManager.AggregateStartupAssets().Templates;
+                // ViewBag.OrganizationName = (await ApplicationDomain.Instance.PortalBranding.RetrieveAsync().ConfigureAwait(false)).OrganizationName;
+                // ViewBag.IsAuthenticated = Request.IsAuthenticated ? "true" : "false";
+                // sb.Append("after viewbag");
+                // sb.AppendLine("");
+                // if (Request.IsAuthenticated)
+                // {
+                //     ViewBag.UserName = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst("name").Value ?? "Unknown";
+                //     ViewBag.Email = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.Name)?.Value ??
+                //         ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.Email)?.Value;
+                // sb.Append("inside Request.IsAuthenticated");
+                // sb.AppendLine("");
+                // }
 
-                ViewBag.Configuratrion = JsonConvert.SerializeObject(
-                    clientConfiguration,
-                    new JsonSerializerSettings() { StringEscapeHandling = StringEscapeHandling.Default });
-                sb.Append("after ViewBag.Configuratrion");
-                sb.AppendLine("");
-                if (!Resources.Culture.TwoLetterISOLanguageName.Equals("en", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    ViewBag.ValidatorMessagesSrc = string.Format(CultureInfo.InvariantCulture, "https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/localization/messages_{0}.js", Resources.Culture.TwoLetterISOLanguageName);
-                }
+                // ViewBag.Configuratrion = JsonConvert.SerializeObject(
+                //     clientConfiguration,
+                //     new JsonSerializerSettings() { StringEscapeHandling = StringEscapeHandling.Default });
+                // sb.Append("after ViewBag.Configuratrion");
+                // sb.AppendLine("");
+                // if (!Resources.Culture.TwoLetterISOLanguageName.Equals("en", StringComparison.InvariantCultureIgnoreCase))
+                // {
+                //     ViewBag.ValidatorMessagesSrc = string.Format(CultureInfo.InvariantCulture, "https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/localization/messages_{0}.js", Resources.Culture.TwoLetterISOLanguageName);
+                // }
 
-                if (form.Count > 0)
-                {
-                    ViewBag.paymentId = form["txnid"];
-                    ViewBag.txnId = form["payuMoneyId"];
-                }
+                // if (form.Count > 0)
+                // {
+                //     ViewBag.paymentId = form["txnid"];
+                //     ViewBag.txnId = form["payuMoneyId"];
+                // }
 
                 return View();
-                ///return new ContentResult();
             }
             catch (Exception exception)
             {
                 ViewBag.ErrorMessage = exception.StackTrace;
                 ViewBag.ErrorDetails = sb.ToString();
               ///  ViewBag.ErrorDetails = exception.Message;
-             ///    return View("Error");
-             return new ContentResult { Content=sb.ToString() };
-            }
+                 return View("Error");
+             }
         }
 
         /// <summary>
