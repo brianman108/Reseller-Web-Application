@@ -60,9 +60,10 @@ namespace Microsoft.Store.PartnerCenter.Storefront
                         AuthenticationFailed = (context) =>
                         {
                             // redirect to the error page
-                            string errorMessage = (context.Exception.InnerException == null) ?
-                                context.Exception.Message : context.Exception.InnerException.Message;
-                            context.OwinContext.Response.Redirect($"/Home/Error?errorMessage={errorMessage}");
+                            // string errorMessage = (context.Exception.InnerException == null) ?
+                            //     context.Exception.Message : context.Exception.InnerException.Message;
+                            // context.OwinContext.Response.Redirect($"/Home/Error?errorMessage={errorMessage}");
+                            throw new Exception(context.Exception);
 
                             context.HandleResponse();
                             return Task.FromResult(0);

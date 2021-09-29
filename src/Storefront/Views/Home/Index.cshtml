@@ -13,14 +13,14 @@
 	<meta name="description" content="@ViewBag.OrganizationName" />
 	<title>@ViewBag.OrganizationName</title>
 
-	<!-- <script type="text/javascript">
+	<script type="text/javascript">
 		var pageLoadTimeStart = Date.now();
 		var isAuthenticated = @ViewBag.IsAuthenticated;
 		var userName = '@ViewBag.UserName';
 		var userEmail = '@ViewBag.Email';
 		var paymentId = '@ViewBag.paymentId';
 		var txnId = '@ViewBag.txnId';
-	</script> -->
+	</script>
 
 	@* Generate the framework configuration and resources *@
 	@Html.Partial("~/Views/Framework/Configuration.cshtml", (object)@ViewBag.Configuratrion)

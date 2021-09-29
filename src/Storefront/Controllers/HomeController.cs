@@ -66,17 +66,17 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
 
                  ViewBag.Templates = ApplicationConfiguration.WebPortalConfigurationManager.AggregateStartupAssets().Templates;
                  ViewBag.OrganizationName = (await ApplicationDomain.Instance.PortalBranding.RetrieveAsync().ConfigureAwait(false)).OrganizationName;
-                // ViewBag.IsAuthenticated = Request.IsAuthenticated ? "true" : "false";
-                // sb.Append("after viewbag");
-                // sb.AppendLine("");
-                // if (Request.IsAuthenticated)
-                // {
-                //     ViewBag.UserName = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst("name").Value ?? "Unknown";
-                //     ViewBag.Email = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.Name)?.Value ??
-                //         ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.Email)?.Value;
-                // sb.Append("inside Request.IsAuthenticated");
-                // sb.AppendLine("");
-                // }
+                ViewBag.IsAuthenticated = Request.IsAuthenticated ? "true" : "false";
+                sb.Append("after viewbag");
+                sb.AppendLine("");
+                if (Request.IsAuthenticated)
+                {
+                    ViewBag.UserName = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst("name").Value ?? "Unknown";
+                    ViewBag.Email = ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.Name)?.Value ??
+                        ((ClaimsIdentity)HttpContext.User.Identity).FindFirst(ClaimTypes.Email)?.Value;
+                sb.Append("inside Request.IsAuthenticated");
+                sb.AppendLine("");
+                }
 
                 ViewBag.Configuratrion = JsonConvert.SerializeObject(
                     clientConfiguration,
