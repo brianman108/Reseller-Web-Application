@@ -28,7 +28,8 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
         /// </summary>
         /// <param name="form">form data</param>
         /// <returns>The SPA markup.</returns>
-        public async Task<ActionResult> Index(FormCollection form)
+        ///public async Task<ActionResult> Index(FormCollection form)
+        public ContentResult Index(FormCollection form)
         {
             StringBuilder sb = new StringBuilder();
             try
@@ -94,7 +95,8 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                     ViewBag.txnId = form["payuMoneyId"];
                 }
 
-                return View();
+                ///return View();
+                return Content();
             }
             catch (Exception exception)
             {
@@ -102,7 +104,7 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 ViewBag.ErrorDetails = sb.ToString();
               ///  ViewBag.ErrorDetails = exception.Message;
              ///    return View("Error");
-             return sb.ToString();
+             return Content(sb.ToString());
             }
         }
 
