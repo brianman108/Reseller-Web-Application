@@ -28,8 +28,7 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
         /// </summary>
         /// <param name="form">form data</param>
         /// <returns>The SPA markup.</returns>
-        ///public async Task<ActionResult> Index(FormCollection form)
-        public async ContentResult Index(FormCollection form)
+        public async Task<ActionResult> Index(FormCollection form)
         {
             StringBuilder sb = new StringBuilder();
             try
@@ -96,7 +95,7 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 }
 
                 ///return View();
-                return Content();
+                return new ContentResult();
             }
             catch (Exception exception)
             {
@@ -104,7 +103,7 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                 ViewBag.ErrorDetails = sb.ToString();
               ///  ViewBag.ErrorDetails = exception.Message;
              ///    return View("Error");
-             return Content(sb.ToString());
+             return new ContentResult(sb.ToString());
             }
         }
 
