@@ -94,8 +94,8 @@ namespace Microsoft.Store.PartnerCenter.Storefront.Controllers
                     ViewBag.txnId = form["payuMoneyId"];
                 }
 
-                ///return View();
-                return new ContentResult();
+                return View();
+                ///return new ContentResult();
             }
             catch (Exception exception)
             {
