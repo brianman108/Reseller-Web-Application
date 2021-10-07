@@ -51,7 +51,8 @@ namespace Microsoft.Store.PartnerCenter.Storefront
                 {
                     //ClientId = ApplicationConfiguration.ActiveDirectoryClientID,
                     ClientId = "662ed35c-0c29-4cee-bbea-111e5d7c9bee",
-                    Authority = $"{ApplicationConfiguration.ActiveDirectoryEndPoint}common",
+                    //Authority = $"{ApplicationConfiguration.ActiveDirectoryEndPoint}common",
+                    Authority = "https://login.microsoftonline.com/common",
                     TokenValidationParameters = new TokenValidationParameters()
                     {
                         // instead of using the default validation (validating against a single issuer value, as we do in line of business apps),
