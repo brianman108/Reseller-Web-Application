@@ -40,6 +40,7 @@ namespace Microsoft.Store.PartnerCenter.Storefront
         /// <param name="app">The application to configure.</param>
         public void ConfigureAuth(IAppBuilder app)
         {
+            StringBuilder sb = new StringBuilder();
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions { });
@@ -59,10 +60,14 @@ namespace Microsoft.Store.PartnerCenter.Storefront
                     {
                         AuthenticationFailed = (context) =>
                         {
+                            sb.Append("clientVisiblePlugins section");
+                            sb.AppendLine("");
                             // redirect to the error page
-                            // string errorMessage = (context.Exception.InnerException == null) ?
-                            //     context.Exception.Message : context.Exception.InnerException.Message;
-                            // context.OwinContext.Response.Redirect($"/Home/Error?errorMessage={errorMessage}");
+                            //string errorMessage = (context.Exception.InnerException == null) ?
+                            string errorMessage = sb.ToString();
+                            //(context.Exception.InnerException == null) ?
+                            //context.Exception.Message : context.Exception.InnerException.Message;
+                            context.OwinContext.Response.Redirect($"/Home/Error?errorMessage={errorMessage}");
                             throw context.Exception;
 
                             context.HandleResponse();
