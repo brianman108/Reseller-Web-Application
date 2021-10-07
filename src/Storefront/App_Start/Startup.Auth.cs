@@ -23,6 +23,7 @@ namespace Microsoft.Store.PartnerCenter.Storefront
     using Owin.Security;
     using Owin.Security.Cookies;
     using Owin.Security.OpenIdConnect;
+    using System.Text;
 
     /// <summary>
     /// Application start up class.
