@@ -50,7 +50,7 @@ namespace Microsoft.Store.PartnerCenter.Storefront
                 new OpenIdConnectAuthenticationOptions
                 {
                     //ClientId = ApplicationConfiguration.ActiveDirectoryClientID,
-                    ClientId = "662ed35c-0c29-4cee-bbea-111e5d7c9bee"
+                    ClientId = "662ed35c-0c29-4cee-bbea-111e5d7c9bee",
                     Authority = $"{ApplicationConfiguration.ActiveDirectoryEndPoint}common",
                     TokenValidationParameters = new TokenValidationParameters()
                     {
