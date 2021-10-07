@@ -68,7 +68,8 @@ namespace Microsoft.Store.PartnerCenter.Storefront
                             string errorMessage = sb.ToString();
                             //(context.Exception.InnerException == null) ?
                             //context.Exception.Message : context.Exception.InnerException.Message;
-                            context.OwinContext.Response.Redirect($"/Home/Error?errorMessage={errorMessage}");
+                            //context.OwinContext.Response.Redirect($"/Home/Error?errorMessage={errorMessage}");
+                            Console.WriteLine(sb.ToString());
                             throw context.Exception;
 
                             context.HandleResponse();
