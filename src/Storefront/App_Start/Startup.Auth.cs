@@ -49,10 +49,10 @@ namespace Microsoft.Store.PartnerCenter.Storefront
             app.UseOpenIdConnectAuthentication(
                 new OpenIdConnectAuthenticationOptions
                 {
-                    //ClientId = ApplicationConfiguration.ActiveDirectoryClientID,
-                    ClientId = "662ed35c-0c29-4cee-bbea-111e5d7c9bee",
-                    //Authority = $"{ApplicationConfiguration.ActiveDirectoryEndPoint}common",
-                    Authority = "https://login.microsoftonline.com/common",
+                    ClientId = ApplicationConfiguration.ActiveDirectoryClientID,
+                    //ClientId = "662ed35c-0c29-4cee-bbea-111e5d7c9bee",
+                    Authority = $"{ApplicationConfiguration.ActiveDirectoryEndPoint}common",
+                    //Authority = "https://login.microsoftonline.com/common",
                     RedirectUri = "https://storefront123.azurewebsites.net/",
                     TokenValidationParameters = new TokenValidationParameters()
                     {
